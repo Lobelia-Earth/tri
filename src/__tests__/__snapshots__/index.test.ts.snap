@@ -1,0 +1,371 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Process $concatenate with calls 1`] = `
+Object {
+  "a": Array [
+    "Hi",
+    "----",
+    "Nice to see you!",
+    "----",
+    "What time is it?",
+    "----",
+  ],
+}
+`;
+
+exports[`Process $concatenate without calls 1`] = `
+Object {
+  "a": Array [
+    1,
+    2,
+    3,
+    4,
+    5,
+    Array [
+      6,
+      7,
+    ],
+  ],
+}
+`;
+
+exports[`Process $csv 1`] = `
+Object {
+  "a": Array [
+    Object {
+      "a": 1,
+      "b": "a",
+      "c": true,
+    },
+    Object {
+      "a": null,
+      "b": "b",
+      "c": false,
+    },
+  ],
+}
+`;
+
+exports[`Process $csv with $forEach 1`] = `
+Object {
+  "a": Array [
+    Object {
+      "a": "John",
+      "b": 30,
+    },
+    Object {
+      "a": "Jane",
+      "b": 28,
+    },
+  ],
+}
+`;
+
+exports[`Process $csv with $json parsing 1`] = `
+Object {
+  "a": Array [
+    Object {
+      "foo": "a",
+      "jsonField": Object {
+        "foo": true,
+      },
+    },
+    Object {
+      "foo": "b",
+      "jsonField": null,
+    },
+  ],
+}
+`;
+
+exports[`Process $csv with absolute path 1`] = `
+Object {
+  "a": Array [
+    Object {
+      "a": 1,
+      "b": "a",
+      "c": true,
+    },
+    Object {
+      "a": null,
+      "b": "b",
+      "c": false,
+    },
+  ],
+}
+`;
+
+exports[`Process $csv with interpolated content 1`] = `
+Object {
+  "a": Array [
+    Object {
+      "a": 1,
+      "b": "a",
+      "c": true,
+    },
+  ],
+}
+`;
+
+exports[`Process $csv with relative path 1`] = `
+Object {
+  "a": Array [
+    Object {
+      "a": 1,
+      "b": "a",
+      "c": true,
+    },
+    Object {
+      "a": null,
+      "b": "b",
+      "c": false,
+    },
+  ],
+}
+`;
+
+exports[`Process $merge with calls 1`] = `
+Object {
+  "a": Object {
+    "a": 3,
+    "b": "Hi foo!",
+    "c": 3.14,
+  },
+}
+`;
+
+exports[`Process $merge without calls 1`] = `
+Object {
+  "a": Object {
+    "b": 3,
+    "c": 4,
+  },
+}
+`;
+
+exports[`Process $yaml calling parent definitions 1`] = `
+Object {
+  "a": Object {
+    "foo": "bar",
+  },
+}
+`;
+
+exports[`Process $yaml with absolute path 1`] = `
+Object {
+  "a": Object {
+    "a": 3,
+    "b": Object {
+      "c": "foo",
+      "d": 4,
+    },
+  },
+}
+`;
+
+exports[`Process $yaml with array 1`] = `
+Object {
+  "a": Array [
+    "foo",
+    "bar",
+    "baz",
+  ],
+}
+`;
+
+exports[`Process $yaml with relative path 1`] = `
+Object {
+  "a": Object {
+    "a": 3,
+    "b": Object {
+      "c": "foo",
+      "d": 4,
+    },
+  },
+}
+`;
+
+exports[`Process call 1`] = `
+Object {
+  "a": 3,
+}
+`;
+
+exports[`Process call shortcut 1`] = `
+Object {
+  "a": "Some fixed text",
+}
+`;
+
+exports[`Process call shortcut, optional 1`] = `
+Object {
+  "a": "Some fixed text",
+}
+`;
+
+exports[`Process call shortcut, optional, with invalid name does not throw 1`] = `
+Object {
+  "a": undefined,
+}
+`;
+
+exports[`Process call with $forEach 1`] = `
+Object {
+  "a": Array [
+    "Hello, Pau!",
+    "Hello, Théo!",
+    "Hello, Sascha!",
+    "Hello, Jordi!",
+    "Hello, Aleix!",
+    "Hello, Guille!",
+  ],
+}
+`;
+
+exports[`Process call with $forEach and $explode: true 1`] = `
+Object {
+  "a": Array [
+    "A1",
+    "A2",
+    "B1",
+    "B2",
+    "C1",
+    "C2",
+  ],
+}
+`;
+
+exports[`Process call with $forEach and $explode: true, but call returns an object 1`] = `
+Object {
+  "a": Array [
+    "A1",
+    "B1",
+    "C1",
+  ],
+}
+`;
+
+exports[`Process call with $forEach and $params 1`] = `
+Object {
+  "a": Array [
+    "Hi, Pau!",
+    "Hi, Théo!",
+  ],
+}
+`;
+
+exports[`Process call with params 1`] = `
+Object {
+  "a": Object {
+    "result1": 7,
+    "result2": Object {
+      "foo": true,
+    },
+    "result3": "My age is 7",
+  },
+}
+`;
+
+exports[`Process call, optional 1`] = `
+Object {
+  "a": 3,
+}
+`;
+
+exports[`Process call, optional, with invalid name does not throw 1`] = `
+Object {
+  "a": undefined,
+}
+`;
+
+exports[`Process exploded call 1`] = `
+Object {
+  "a": Array [
+    1,
+    2,
+    3,
+    4,
+    "finished!",
+  ],
+}
+`;
+
+exports[`Process exploded short call 1`] = `
+Object {
+  "a": Array [
+    1,
+    2,
+    3,
+    4,
+    "finished!",
+  ],
+}
+`;
+
+exports[`Process nested call shortcuts 1`] = `
+Object {
+  "a": "Final text",
+}
+`;
+
+exports[`Process nested calls with params 1`] = `
+Object {
+  "a": Object {
+    "result1": 7,
+    "result2": 10,
+  },
+}
+`;
+
+exports[`Process nested interpolation 1`] = `
+Object {
+  "a": "Hello world!",
+}
+`;
+
+exports[`Process nested shortcut and interpolation 1`] = `
+Object {
+  "a": "Hello world!",
+}
+`;
+
+exports[`Process removes $definitions 1`] = `
+Object {
+  "a": 3,
+}
+`;
+
+exports[`Process simple interpolation 1`] = `
+Object {
+  "a": Object {
+    "b": "Length: 7 m",
+  },
+}
+`;
+
+exports[`Process simple interpolation without escapes 1`] = `
+Object {
+  "a": Object {
+    "b": "Comparisons < >",
+  },
+}
+`;
+
+exports[`Process tree with no definitions 1`] = `
+Object {
+  "a": Object {
+    "b": Object {
+      "c": 3,
+      "d": "foo",
+      "e": null,
+      "f": true,
+      "g": undefined,
+    },
+    "h": Array [
+      3,
+      4,
+      "a",
+    ],
+  },
+}
+`;

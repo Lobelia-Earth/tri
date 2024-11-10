@@ -277,6 +277,8 @@ tri({
 
 The included file is processed exactly as if the content was inline. This means you can use all the features of _tri_ within the included file, including function calls and string interpolation.
 
+**Important note**: relative paths are resolved from the current working directory of the Node.js process.
+
 ## Contributing
 
 Currently we don't accept PR's from external collaborators.

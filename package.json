@@ -10,6 +10,8 @@
     "yaml",
     "csv"
   ],
+  "files": ["lib"],
+  "type": "module",
   "homepage": "https://github.com/lobelia-earth/tri",
   "bugs": {
     "url": "https://github.com/lobelia-earth/tri/issues"
@@ -18,14 +20,17 @@
     "type": "git",
     "url": "https://github.com/lobelia-earth/tri.git"
   },
+  "exports": {
+    ".": {
+      "import": "./lib/index.js",
+      "require": "./lib/cjs/index.js",
+      "types": "./lib/index.d.ts"
+    }
+  },
   "scripts": {
-    "build": "yarn compile",
-    "compile": "yarn compile:clean && yarn compile:types && yarn compile:main",
-    "compileFast": "yarn compile:clean && yarn compile:main",
-    "compile:clean": "rm -rf ./lib",
-    "compile:types": "tsc --pretty || exit 0",
-    "compile:main": "babel src -d lib --extensions \".ts,.js\" --copy-files",
-    "compileWatch": "yarn compile --watch",
+    "build": "tsc && tsc -p tsconfig.cjs.json",
+    "build:watch": "tsc --watch & tsc --watch -p tsconfig.cjs.json",
+    "clean": "rm -r lib",
     "lint": "eslint src --ext .js,.jsx,.ts,.tsx",
     "typecheck": "tsc --pretty",
     "test": "jest --coverage --verbose 2>&1",
@@ -39,11 +44,6 @@
     "timm": "^1.6.2"
   },
   "devDependencies": {
-    "@babel/cli": "^7.17.6",
-    "@babel/core": "^7.17.7",
-    "@babel/plugin-transform-runtime": "^7.17.0",
-    "@babel/preset-env": "^7.16.11",
-    "@babel/preset-typescript": "^7.16.7",
     "@types/jest": "^26.0.10",
     "@types/js-yaml": "^4.0.9",
     "@types/mustache": "^4.0.1",

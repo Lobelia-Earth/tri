@@ -1,8 +1,8 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Process $concatenate with calls 1`] = `
-Object {
-  "a": Array [
+exports[`Process > $concatenate with calls 1`] = `
+{
+  "a": [
     "Hi",
     "----",
     "Nice to see you!",
@@ -13,15 +13,15 @@ Object {
 }
 `;
 
-exports[`Process $concatenate without calls 1`] = `
-Object {
-  "a": Array [
+exports[`Process > $concatenate without calls 1`] = `
+{
+  "a": [
     1,
     2,
     3,
     4,
     5,
-    Array [
+    [
       6,
       7,
     ],
@@ -29,15 +29,15 @@ Object {
 }
 `;
 
-exports[`Process $csv 1`] = `
-Object {
-  "a": Array [
-    Object {
+exports[`Process > $csv 1`] = `
+{
+  "a": [
+    {
       "a": 1,
       "b": "a",
       "c": true,
     },
-    Object {
+    {
       "a": null,
       "b": "b",
       "c": false,
@@ -46,14 +46,14 @@ Object {
 }
 `;
 
-exports[`Process $csv with $forEach 1`] = `
-Object {
-  "a": Array [
-    Object {
+exports[`Process > $csv with $forEach 1`] = `
+{
+  "a": [
+    {
       "a": "John",
       "b": 30,
     },
-    Object {
+    {
       "a": "Jane",
       "b": 28,
     },
@@ -61,16 +61,16 @@ Object {
 }
 `;
 
-exports[`Process $csv with $json parsing 1`] = `
-Object {
-  "a": Array [
-    Object {
+exports[`Process > $csv with $json parsing 1`] = `
+{
+  "a": [
+    {
       "foo": "a",
-      "jsonField": Object {
+      "jsonField": {
         "foo": true,
       },
     },
-    Object {
+    {
       "foo": "b",
       "jsonField": null,
     },
@@ -78,15 +78,15 @@ Object {
 }
 `;
 
-exports[`Process $csv with absolute path 1`] = `
-Object {
-  "a": Array [
-    Object {
+exports[`Process > $csv with absolute path 1`] = `
+{
+  "a": [
+    {
       "a": 1,
       "b": "a",
       "c": true,
     },
-    Object {
+    {
       "a": null,
       "b": "b",
       "c": false,
@@ -95,10 +95,10 @@ Object {
 }
 `;
 
-exports[`Process $csv with interpolated content 1`] = `
-Object {
-  "a": Array [
-    Object {
+exports[`Process > $csv with interpolated content 1`] = `
+{
+  "a": [
+    {
       "a": 1,
       "b": "a",
       "c": true,
@@ -107,15 +107,15 @@ Object {
 }
 `;
 
-exports[`Process $csv with relative path 1`] = `
-Object {
-  "a": Array [
-    Object {
+exports[`Process > $csv with relative path 1`] = `
+{
+  "a": [
+    {
       "a": 1,
       "b": "a",
       "c": true,
     },
-    Object {
+    {
       "a": null,
       "b": "b",
       "c": false,
@@ -124,9 +124,9 @@ Object {
 }
 `;
 
-exports[`Process $merge with calls 1`] = `
-Object {
-  "a": Object {
+exports[`Process > $merge with calls 1`] = `
+{
+  "a": {
     "a": 3,
     "b": "Hi foo!",
     "c": 3.14,
@@ -134,28 +134,28 @@ Object {
 }
 `;
 
-exports[`Process $merge without calls 1`] = `
-Object {
-  "a": Object {
+exports[`Process > $merge without calls 1`] = `
+{
+  "a": {
     "b": 3,
     "c": 4,
   },
 }
 `;
 
-exports[`Process $yaml calling parent definitions 1`] = `
-Object {
-  "a": Object {
+exports[`Process > $yaml calling parent definitions 1`] = `
+{
+  "a": {
     "foo": "bar",
   },
 }
 `;
 
-exports[`Process $yaml with absolute path 1`] = `
-Object {
-  "a": Object {
+exports[`Process > $yaml with absolute path 1`] = `
+{
+  "a": {
     "a": 3,
-    "b": Object {
+    "b": {
       "c": "foo",
       "d": 4,
     },
@@ -163,9 +163,9 @@ Object {
 }
 `;
 
-exports[`Process $yaml with array 1`] = `
-Object {
-  "a": Array [
+exports[`Process > $yaml with array 1`] = `
+{
+  "a": [
     "foo",
     "bar",
     "baz",
@@ -173,11 +173,11 @@ Object {
 }
 `;
 
-exports[`Process $yaml with relative path 1`] = `
-Object {
-  "a": Object {
+exports[`Process > $yaml with relative path 1`] = `
+{
+  "a": {
     "a": 3,
-    "b": Object {
+    "b": {
       "c": "foo",
       "d": 4,
     },
@@ -185,33 +185,33 @@ Object {
 }
 `;
 
-exports[`Process call 1`] = `
-Object {
+exports[`Process > call 1`] = `
+{
   "a": 3,
 }
 `;
 
-exports[`Process call shortcut 1`] = `
-Object {
+exports[`Process > call shortcut 1`] = `
+{
   "a": "Some fixed text",
 }
 `;
 
-exports[`Process call shortcut, optional 1`] = `
-Object {
+exports[`Process > call shortcut, optional 1`] = `
+{
   "a": "Some fixed text",
 }
 `;
 
-exports[`Process call shortcut, optional, with invalid name does not throw 1`] = `
-Object {
+exports[`Process > call shortcut, optional, with invalid name does not throw 1`] = `
+{
   "a": undefined,
 }
 `;
 
-exports[`Process call with $forEach 1`] = `
-Object {
-  "a": Array [
+exports[`Process > call with $forEach 1`] = `
+{
+  "a": [
     "Hello, Pau!",
     "Hello, Théo!",
     "Hello, Sascha!",
@@ -222,9 +222,9 @@ Object {
 }
 `;
 
-exports[`Process call with $forEach and $explode: true 1`] = `
-Object {
-  "a": Array [
+exports[`Process > call with $forEach and $explode: true 1`] = `
+{
+  "a": [
     "A1",
     "A2",
     "B1",
@@ -235,9 +235,9 @@ Object {
 }
 `;
 
-exports[`Process call with $forEach and $explode: true, but call returns an object 1`] = `
-Object {
-  "a": Array [
+exports[`Process > call with $forEach and $explode: true, but call returns an object 1`] = `
+{
+  "a": [
     "A1",
     "B1",
     "C1",
@@ -245,20 +245,20 @@ Object {
 }
 `;
 
-exports[`Process call with $forEach and $params 1`] = `
-Object {
-  "a": Array [
+exports[`Process > call with $forEach and $params 1`] = `
+{
+  "a": [
     "Hi, Pau!",
     "Hi, Théo!",
   ],
 }
 `;
 
-exports[`Process call with params 1`] = `
-Object {
-  "a": Object {
+exports[`Process > call with params 1`] = `
+{
+  "a": {
     "result1": 7,
-    "result2": Object {
+    "result2": {
       "foo": true,
     },
     "result3": "My age is 7",
@@ -266,21 +266,21 @@ Object {
 }
 `;
 
-exports[`Process call, optional 1`] = `
-Object {
+exports[`Process > call, optional 1`] = `
+{
   "a": 3,
 }
 `;
 
-exports[`Process call, optional, with invalid name does not throw 1`] = `
-Object {
+exports[`Process > call, optional, with invalid name does not throw 1`] = `
+{
   "a": undefined,
 }
 `;
 
-exports[`Process exploded call 1`] = `
-Object {
-  "a": Array [
+exports[`Process > exploded call 1`] = `
+{
+  "a": [
     1,
     2,
     3,
@@ -290,9 +290,9 @@ Object {
 }
 `;
 
-exports[`Process exploded short call 1`] = `
-Object {
-  "a": Array [
+exports[`Process > exploded short call 1`] = `
+{
+  "a": [
     1,
     2,
     3,
@@ -302,66 +302,66 @@ Object {
 }
 `;
 
-exports[`Process nested call shortcuts 1`] = `
-Object {
+exports[`Process > nested call shortcuts 1`] = `
+{
   "a": "Final text",
 }
 `;
 
-exports[`Process nested calls with params 1`] = `
-Object {
-  "a": Object {
+exports[`Process > nested calls with params 1`] = `
+{
+  "a": {
     "result1": 7,
     "result2": 10,
   },
 }
 `;
 
-exports[`Process nested interpolation 1`] = `
-Object {
+exports[`Process > nested interpolation 1`] = `
+{
   "a": "Hello world!",
 }
 `;
 
-exports[`Process nested shortcut and interpolation 1`] = `
-Object {
+exports[`Process > nested shortcut and interpolation 1`] = `
+{
   "a": "Hello world!",
 }
 `;
 
-exports[`Process removes $definitions 1`] = `
-Object {
+exports[`Process > removes $definitions 1`] = `
+{
   "a": 3,
 }
 `;
 
-exports[`Process simple interpolation 1`] = `
-Object {
-  "a": Object {
+exports[`Process > simple interpolation 1`] = `
+{
+  "a": {
     "b": "Length: 7 m",
   },
 }
 `;
 
-exports[`Process simple interpolation without escapes 1`] = `
-Object {
-  "a": Object {
+exports[`Process > simple interpolation without escapes 1`] = `
+{
+  "a": {
     "b": "Comparisons < >",
   },
 }
 `;
 
-exports[`Process tree with no definitions 1`] = `
-Object {
-  "a": Object {
-    "b": Object {
+exports[`Process > tree with no definitions 1`] = `
+{
+  "a": {
+    "b": {
       "c": 3,
       "d": "foo",
       "e": null,
       "f": true,
       "g": undefined,
     },
-    "h": Array [
+    "h": [
       3,
       4,
       "a",

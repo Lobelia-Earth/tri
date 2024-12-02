@@ -1,28 +1,29 @@
-import { tri } from '../index';
+import { describe, it, expect } from "vitest";
+import { tri } from "../index";
 
-describe('Process', () => {
+describe("Process", () => {
   // ====================================
   // Basic
   // ====================================
-  it('null', () => {
+  it("null", () => {
     expect(tri(null)).toBeNull();
   });
 
-  it('undefined', () => {
+  it("undefined", () => {
     expect(tri(undefined)).toBeUndefined();
   });
 
-  it('tree with no definitions', () => {
+  it("tree with no definitions", () => {
     const tree = {
       a: {
-        b: { c: 3, d: 'foo', e: null, f: true, g: undefined },
-        h: [3, 4, 'a'],
+        b: { c: 3, d: "foo", e: null, f: true, g: undefined },
+        h: [3, 4, "a"],
       },
     };
     expect(tri(tree)).toMatchSnapshot();
   });
 
-  it('removes $definitions', () => {
+  it("removes $definitions", () => {
     const tree = { a: 3, $definitions: { foo: 4 } };
     expect(tri(tree)).toMatchSnapshot();
   });
@@ -30,28 +31,28 @@ describe('Process', () => {
   // ====================================
   // Interpolation
   // ====================================
-  it('simple interpolation', () => {
+  it("simple interpolation", () => {
     const tree = {
-      a: { b: 'Length: <<$.len>> <<$.units>>' },
-      $definitions: { len: 7, units: 'm' },
+      a: { b: "Length: <<$.len>> <<$.units>>" },
+      $definitions: { len: 7, units: "m" },
     };
     expect(tri(tree)).toMatchSnapshot();
   });
 
-  it('simple interpolation without escapes', () => {
+  it("simple interpolation without escapes", () => {
     const tree = {
-      a: { b: 'Comparisons <<$.lt>> <<$.gt>>' },
-      $definitions: { lt: '<', gt: '>' },
+      a: { b: "Comparisons <<$.lt>> <<$.gt>>" },
+      $definitions: { lt: "<", gt: ">" },
     };
     expect(tri(tree)).toMatchSnapshot();
   });
 
-  it('nested interpolation', () => {
+  it("nested interpolation", () => {
     const tree = {
-      a: 'Hello <<$.foo>>',
+      a: "Hello <<$.foo>>",
       $definitions: {
-        foo: '<<$.bar>>!',
-        bar: 'world',
+        foo: "<<$.bar>>!",
+        bar: "world",
       },
     };
     expect(tri(tree)).toMatchSnapshot();
@@ -60,60 +61,60 @@ describe('Process', () => {
   // ====================================
   // Call shortcut
   // ====================================
-  it('call shortcut', () => {
+  it("call shortcut", () => {
     const tree = {
-      a: '$foo',
-      $definitions: { foo: 'Some fixed text' },
+      a: "$foo",
+      $definitions: { foo: "Some fixed text" },
     };
     expect(tri(tree)).toMatchSnapshot();
   });
 
-  it('call shortcut, optional', () => {
+  it("call shortcut, optional", () => {
     const tree = {
-      a: '$foo?',
-      $definitions: { foo: 'Some fixed text' },
+      a: "$foo?",
+      $definitions: { foo: "Some fixed text" },
     };
     expect(tri(tree)).toMatchSnapshot();
   });
 
-  it('call shortcut with invalid name throws', () => {
+  it("call shortcut with invalid name throws", () => {
     const tree = {
-      a: '$fuzz',
-      $definitions: { foo: 'Some fixed text' },
+      a: "$fuzz",
+      $definitions: { foo: "Some fixed text" },
     };
     expect(() => tri(tree)).toThrowError();
   });
 
-  it('call shortcut, optional, with invalid name does not throw', () => {
-    const tree = { a: '$fuzz?' };
+  it("call shortcut, optional, with invalid name does not throw", () => {
+    const tree = { a: "$fuzz?" };
     expect(tri(tree)).toMatchSnapshot();
   });
 
-  it('nested call shortcuts', () => {
+  it("nested call shortcuts", () => {
     const tree = {
-      a: '$foo',
-      $definitions: { foo: '$bar', bar: 'Final text' },
+      a: "$foo",
+      $definitions: { foo: "$bar", bar: "Final text" },
     };
     expect(tri(tree)).toMatchSnapshot();
   });
 
-  it('exploded short call', () => {
+  it("exploded short call", () => {
     const tree = {
-      a: ['$*foo', '$*bar'],
+      a: ["$*foo", "$*bar"],
       $definitions: {
-        foo: ['$*qux', 3],
-        bar: [4, '$theEnd'],
+        foo: ["$*qux", 3],
+        bar: [4, "$theEnd"],
         qux: [1, 2],
-        theEnd: 'finished!',
+        theEnd: "finished!",
       },
     };
     expect(tri(tree)).toMatchSnapshot();
   });
 
-  it('exploded short call returning non-array throws', () => {
+  it("exploded short call returning non-array throws", () => {
     const tree = {
-      a: ['$*foo'],
-      $definitions: { foo: 'Some fixed text' },
+      a: ["$*foo"],
+      $definitions: { foo: "Some fixed text" },
     };
     expect(() => tri(tree)).toThrowError();
   });
@@ -121,179 +122,179 @@ describe('Process', () => {
   // ====================================
   // Call shortcut + interpolation
   // ====================================
-  it('nested shortcut and interpolation', () => {
+  it("nested shortcut and interpolation", () => {
     const tree = {
-      a: '$foo',
-      $definitions: { foo: '$bar', bar: 'Hello <<$.bass>>', bass: 'world!' },
+      a: "$foo",
+      $definitions: { foo: "$bar", bar: "Hello <<$.bass>>", bass: "world!" },
       // NOTE: it doesn't work the other way around (shortcut inside interpolation)
       // Workaround: just use interpolation inside interpolation in this case
     };
     expect(tri(tree)).toMatchSnapshot();
   });
 
-  it('nested interpolation and shortcut', () => {
+  it("nested interpolation and shortcut", () => {
     const tree = {
-      a: '$foo',
+      a: "$foo",
       $definitions: {
-        foo: '<<$.prefix>> <<$.bar>>',
-        prefix: 'Hello',
-        bar: '$bass',
-        bass: 'world!',
+        foo: "<<$.prefix>> <<$.bar>>",
+        prefix: "Hello",
+        bar: "$bass",
+        bass: "world!",
       },
     };
-    expect(tri(tree).a).toEqual('Hello world!');
+    expect(tri(tree).a).toEqual("Hello world!");
   });
 
   // ====================================
   // Calls
   // ====================================
-  it('call', () => {
+  it("call", () => {
     const tree = {
-      a: { $call: 'foo' },
+      a: { $call: "foo" },
       $definitions: { foo: 3 },
     };
     expect(tri(tree)).toMatchSnapshot();
   });
 
-  it('call, optional', () => {
+  it("call, optional", () => {
     const tree = {
-      a: { $call: 'foo', $optional: true },
+      a: { $call: "foo", $optional: true },
       $definitions: { foo: 3 },
     };
     expect(tri(tree)).toMatchSnapshot();
   });
 
-  it('call with invalid name throws', () => {
-    const tree = { a: { $call: 'foo' } };
+  it("call with invalid name throws", () => {
+    const tree = { a: { $call: "foo" } };
     expect(() => tri(tree)).toThrowError();
   });
 
-  it('call, optional, with invalid name does not throw', () => {
+  it("call, optional, with invalid name does not throw", () => {
     const tree = {
-      a: { $call: 'fuzz', $optional: true },
+      a: { $call: "fuzz", $optional: true },
     };
     expect(tri(tree)).toMatchSnapshot();
   });
 
-  it('call with params', () => {
+  it("call with params", () => {
     const tree = {
-      a: { $call: 'fn', $params: { param1: 7, param2: { foo: true } } },
+      a: { $call: "fn", $params: { param1: 7, param2: { foo: true } } },
       $definitions: {
         fn: {
-          result1: '$param1',
-          result2: '$param2',
-          result3: 'My age is <<$.param1>>',
+          result1: "$param1",
+          result2: "$param2",
+          result3: "My age is <<$.param1>>",
         },
       },
     };
     expect(tri(tree)).toMatchSnapshot();
   });
 
-  it('nested calls with params', () => {
+  it("nested calls with params", () => {
     const tree = {
-      a: { $call: 'fn1', $params: { param1: 7 } },
+      a: { $call: "fn1", $params: { param1: 7 } },
       $definitions: {
-        fn1: { $call: 'fn2', $params: { param2: 10 } },
-        fn2: { result1: '$param1', result2: '$param2' },
+        fn1: { $call: "fn2", $params: { param2: 10 } },
+        fn2: { result1: "$param1", result2: "$param2" },
       },
     };
     expect(tri(tree)).toMatchSnapshot();
   });
 
-  it('exploded call', () => {
+  it("exploded call", () => {
     const tree = {
       a: [
-        { $call: 'foo', $explode: true },
-        { $call: 'bar', $explode: true },
+        { $call: "foo", $explode: true },
+        { $call: "bar", $explode: true },
       ],
       $definitions: {
-        foo: ['$*qux', 3],
-        bar: [4, '$theEnd'],
+        foo: ["$*qux", 3],
+        bar: [4, "$theEnd"],
         qux: [1, 2],
-        theEnd: 'finished!',
+        theEnd: "finished!",
       },
     };
     expect(tri(tree)).toMatchSnapshot();
   });
 
-  it('exploded call returning non-array throws', () => {
+  it("exploded call returning non-array throws", () => {
     const tree = {
-      a: [{ $call: 'foo', $explode: true }],
-      $definitions: { foo: 'Some fixed text' },
+      a: [{ $call: "foo", $explode: true }],
+      $definitions: { foo: "Some fixed text" },
     };
     expect(() => tri(tree)).toThrowError();
   });
 
-  it('call with $forEach', () => {
+  it("call with $forEach", () => {
     const tree = {
       a: {
-        $call: 'foo',
+        $call: "foo",
         $forEach: [
-          { name: 'Pau' },
-          { name: 'Théo' },
-          { name: 'Sascha' },
-          { name: 'Jordi' },
-          { name: 'Aleix' },
-          { name: 'Guille' },
+          { name: "Pau" },
+          { name: "Théo" },
+          { name: "Sascha" },
+          { name: "Jordi" },
+          { name: "Aleix" },
+          { name: "Guille" },
         ],
       },
       $definitions: {
-        salutation: 'Hello',
-        foo: '<<$.salutation>>, <<$.name>>!',
+        salutation: "Hello",
+        foo: "<<$.salutation>>, <<$.name>>!",
       },
     };
     expect(tri(tree)).toMatchSnapshot();
   });
 
-  it('call with $forEach and $params', () => {
+  it("call with $forEach and $params", () => {
     const tree = {
       a: {
-        $call: 'foo',
-        $forEach: [{ name: 'Pau' }, { name: 'Théo' }],
-        $params: { salutation: 'Hi' },
+        $call: "foo",
+        $forEach: [{ name: "Pau" }, { name: "Théo" }],
+        $params: { salutation: "Hi" },
       },
       $definitions: {
-        foo: '<<$.salutation>>, <<$.name>>!',
+        foo: "<<$.salutation>>, <<$.name>>!",
       },
     };
     expect(tri(tree)).toMatchSnapshot();
   });
 
-  it('call with $forEach but no array throws', () => {
+  it("call with $forEach but no array throws", () => {
     const tree = {
       a: {
-        $call: 'foo',
-        $forEach: { name: 'Pau' }, // should be an array!
+        $call: "foo",
+        $forEach: { name: "Pau" }, // should be an array!
       },
-      $definitions: { foo: 'Hi, <<$.name>>!' },
+      $definitions: { foo: "Hi, <<$.name>>!" },
     };
     expect(() => tri(tree)).toThrowError();
   });
 
-  it('call with $forEach and $explode: true', () => {
+  it("call with $forEach and $explode: true", () => {
     const tree = {
       a: [
         {
-          $call: 'foo',
+          $call: "foo",
           $explode: true,
-          $forEach: [{ item: 'A' }, { item: 'B' }, { item: 'C' }],
+          $forEach: [{ item: "A" }, { item: "B" }, { item: "C" }],
         },
       ],
-      $definitions: { foo: ['<<$.item>>1', '<<$.item>>2'] },
+      $definitions: { foo: ["<<$.item>>1", "<<$.item>>2"] },
     };
     expect(tri(tree)).toMatchSnapshot();
   });
 
-  it('call with $forEach and $explode: true, but call returns an object', () => {
+  it("call with $forEach and $explode: true, but call returns an object", () => {
     const tree = {
       a: [
         {
-          $call: 'foo',
+          $call: "foo",
           $explode: true,
-          $forEach: [{ item: 'A' }, { item: 'B' }, { item: 'C' }],
+          $forEach: [{ item: "A" }, { item: "B" }, { item: "C" }],
         },
       ],
-      $definitions: { foo: '<<$.item>>1' },
+      $definitions: { foo: "<<$.item>>1" },
     };
     expect(tri(tree)).toMatchSnapshot();
   });
@@ -301,30 +302,30 @@ describe('Process', () => {
   // ====================================
   // Merge
   // ====================================
-  it('$merge without calls', () => {
+  it("$merge without calls", () => {
     const tree = { a: { $merge: [{ b: 3 }, { c: 4 }] } };
     expect(tri(tree)).toMatchSnapshot();
   });
 
-  it('$merge with calls', () => {
+  it("$merge with calls", () => {
     const tree = {
       a: {
         $merge: [
-          '$fn1',
-          { $call: 'fn2', $params: { param: 'foo' } },
-          { $call: 'fn3', $params: { param: 3.14 } },
+          "$fn1",
+          { $call: "fn2", $params: { param: "foo" } },
+          { $call: "fn3", $params: { param: 3.14 } },
         ],
       },
       $definitions: {
         fn1: { a: 3 },
-        fn2: { b: 'Hi <<$.param>>!' },
-        fn3: { c: '$param' },
+        fn2: { b: "Hi <<$.param>>!" },
+        fn3: { c: "$param" },
       },
     };
     expect(tri(tree)).toMatchSnapshot();
   });
 
-  it('$merge throws without array', () => {
+  it("$merge throws without array", () => {
     const tree = { a: { $merge: { b: 3 } } };
     expect(() => tri(tree)).toThrow();
   });
@@ -332,30 +333,30 @@ describe('Process', () => {
   // ====================================
   // Concatenate
   // ====================================
-  it('$concatenate without calls', () => {
+  it("$concatenate without calls", () => {
     const tree = { a: { $concatenate: [1, 2, [3, 4], 5, [[6, 7]]] } };
     expect(tri(tree)).toMatchSnapshot();
   });
 
-  it('$concatenate with calls', () => {
+  it("$concatenate with calls", () => {
     const tree = {
       a: {
         $concatenate: [
-          '$salute',
-          { $call: 'say', $params: { param: 'Nice to see you' } },
-          { $call: 'ask', $params: { param: 'What time is it' } },
+          "$salute",
+          { $call: "say", $params: { param: "Nice to see you" } },
+          { $call: "ask", $params: { param: "What time is it" } },
         ],
       },
       $definitions: {
-        salute: ['Hi', '----'],
-        say: ['<<$.param>>!', '----'],
-        ask: ['<<$.param>>?', '----'],
+        salute: ["Hi", "----"],
+        say: ["<<$.param>>!", "----"],
+        ask: ["<<$.param>>?", "----"],
       },
     };
     expect(tri(tree)).toMatchSnapshot();
   });
 
-  it('$concatenate throws without array', () => {
+  it("$concatenate throws without array", () => {
     const tree = { a: { $concatenate: { b: 3 } } };
     expect(() => tri(tree)).toThrow();
   });
@@ -363,7 +364,7 @@ describe('Process', () => {
   // ====================================
   // CSV
   // ====================================
-  it('$csv', () => {
+  it("$csv", () => {
     const tree = {
       a: {
         $csv: `a,b,c
@@ -374,16 +375,16 @@ describe('Process', () => {
     expect(tri(tree)).toMatchSnapshot();
   });
 
-  it('$csv with relative path', () => {
+  it("$csv with relative path", () => {
     const tree = {
       a: {
-        $csv: './src/__tests__/data.csv',
+        $csv: "./src/__tests__/data.csv",
       },
     };
     expect(tri(tree)).toMatchSnapshot();
   });
 
-  it('$csv with absolute path', () => {
+  it("$csv with absolute path", () => {
     const tree = {
       a: {
         $csv: `file://${process.cwd()}/src/__tests__/data.csv`,
@@ -392,7 +393,7 @@ describe('Process', () => {
     expect(tri(tree)).toMatchSnapshot();
   });
 
-  it('$csv with missing columns throws', () => {
+  it("$csv with missing columns throws", () => {
     const tree = {
       a: {
         $csv: `a,b,c
@@ -403,7 +404,7 @@ c,b`,
     expect(() => tri(tree)).toThrow();
   });
 
-  it('$csv with extra columns throws', () => {
+  it("$csv with extra columns throws", () => {
     const tree = {
       a: {
         $csv: `a,b,c
@@ -414,41 +415,41 @@ c,b`,
     expect(() => tri(tree)).toThrow();
   });
 
-  it('$csv without content throws', () => {
+  it("$csv without content throws", () => {
     const tree = { a: { $csv: null } };
     expect(() => tri(tree)).toThrow();
   });
 
-  it('$csv with $json parsing', () => {
+  it("$csv with $json parsing", () => {
     const tree = {
       a: {
         $csv: `foo,jsonField
 a,"{""foo"":true}"
 b,`,
-        $json: ['jsonField'],
+        $json: ["jsonField"],
       },
     };
     expect(tri(tree)).toMatchSnapshot();
   });
 
-  it('$csv with interpolated content', () => {
+  it("$csv with interpolated content", () => {
     const tree = {
       a: {
         $csv: `a,b,c
 1,a,<<$.myVar>>`,
       },
-      $definitions: { myVar: 'true' },
+      $definitions: { myVar: "true" },
     };
     expect(tri(tree)).toMatchSnapshot();
   });
 
-  it('$csv with $forEach', () => {
+  it("$csv with $forEach", () => {
     const tree = {
       a: {
-        $call: 'myFunction',
+        $call: "myFunction",
         $forEach: { $csv: 'name,age\n"John",30\n"Jane",28' },
       },
-      $definitions: { myFunction: { a: '$name', b: '$age' } },
+      $definitions: { myFunction: { a: "$name", b: "$age" } },
     };
     expect(tri(tree)).toMatchSnapshot();
   });
@@ -456,16 +457,16 @@ b,`,
   // ====================================
   // YAML
   // ====================================
-  it('$yaml with relative path', () => {
+  it("$yaml with relative path", () => {
     const tree = {
       a: {
-        $yaml: './src/__tests__/data.yaml',
+        $yaml: "./src/__tests__/data.yaml",
       },
     };
     expect(tri(tree)).toMatchSnapshot();
   });
 
-  it('$yaml with absolute path', () => {
+  it("$yaml with absolute path", () => {
     const tree = {
       a: {
         $yaml: `file://${process.cwd()}/src/__tests__/data.yaml`,
@@ -474,25 +475,25 @@ b,`,
     expect(tri(tree)).toMatchSnapshot();
   });
 
-  it('$yaml without content throws', () => {
+  it("$yaml without content throws", () => {
     const tree = { a: { $yaml: null } };
     expect(() => tri(tree)).toThrow();
   });
 
-  it('$yaml calling parent definitions', () => {
+  it("$yaml calling parent definitions", () => {
     const tree = {
       a: {
         $yaml: `foo: $foo`,
       },
-      $definitions: { foo: 'bar' },
+      $definitions: { foo: "bar" },
     };
     expect(tri(tree)).toMatchSnapshot();
   });
 
-  it('$yaml with array', () => {
+  it("$yaml with array", () => {
     const tree = {
       a: {
-        $yaml: '- foo\n- bar\n- baz',
+        $yaml: "- foo\n- bar\n- baz",
       },
     };
     expect(tri(tree)).toMatchSnapshot();
@@ -501,20 +502,20 @@ b,`,
   // ====================================
   // Deep copies
   // ====================================
-  it('deep copies may exist by default', () => {
+  it("deep copies may exist by default", () => {
     const tree = {
-      a: '$foo',
-      b: '$foo',
+      a: "$foo",
+      b: "$foo",
       $definitions: { foo: { bar: 3 } },
     };
     const res = tri(tree);
     expect(res.a === res.b).toBeTruthy();
   });
 
-  it('deep copies can be disabled', () => {
+  it("deep copies can be disabled", () => {
     const tree = {
-      a: '$foo',
-      b: '$foo',
+      a: "$foo",
+      b: "$foo",
       $definitions: { foo: { bar: 3 } },
     };
     const res = tri(tree, { noDeepCopies: true });

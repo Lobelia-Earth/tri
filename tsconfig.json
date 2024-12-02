@@ -1,26 +1,25 @@
 {
   "compilerOptions": {
-    "allowJs": true,
-    "alwaysStrict": true,
+    // Default to outputting ESM
+    "module": "ESNext",
+    "outDir": "lib",
+    "declaration": true,
+
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
     "jsx": "preserve",
     "lib": ["dom", "es2017"],
-    "module": "esnext",
     "moduleResolution": "node",
-    "declaration": true,
-    "emitDeclarationOnly": true,
     "noFallthroughCasesInSwitch": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true,
-    "target": "esnext",
-    "rootDir": "src",
-    "outDir": "lib"
+    "target": "ES2022",
+    "rootDir": "src"
   },
-  "exclude": ["node_modules"],
-  "include": ["src/**/*.ts", "src/**/*.tsx"]
+  "exclude": ["node_modules", "src/__tests__", "src/sandbox.ts"],
+  "include": ["eslint.config.js", "src"]
 }

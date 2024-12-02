@@ -1,5 +1,3 @@
-node_modules
-package.json
-lib
-*.html
+lib/
+node_modules/
 *.yaml

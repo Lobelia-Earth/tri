@@ -1,3 +1,9 @@
+## Next
+
+- Provide CJS and ESM exports
+- Deprecate babel in favour of Typescript's compiler
+- Deprecate Jest in favour of Vitest
+
 ## 1.12.3 (2024-6-25)
 
 ## 1.12.2 (2024-6-25)

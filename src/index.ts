@@ -1,14 +1,16 @@
-import { merge, set as timmSet } from 'timm';
-import Mustache from 'mustache';
-import Papa from 'papaparse';
-import yamlParser from 'js-yaml';
+import { merge, set as timmSet } from "timm";
+import Mustache from "mustache";
+import type { OpeningAndClosingTags } from "mustache";
+import Papa from "papaparse";
+import { readFileSync } from "node:fs";
+import yamlParser from "js-yaml";
 
-const TEMPLATE_TAGS: any = ['<<', '>>'];
+const TEMPLATE_TAGS: OpeningAndClosingTags = ["<<", ">>"];
 const CSV_PARSE_OPTIONS = {
   header: true,
-  delimiter: ',',
+  delimiter: ",",
   dynamicTyping: true,
-  comments: '#',
+  comments: "#",
   skipEmptyLines: true,
 };
 
@@ -26,7 +28,7 @@ type Options = {
 // Main
 // ====================================
 const tri = (tree: Tree, options: Options = {}): Tree => {
-  if (tree == null || typeof tree !== 'object') return tree;
+  if (tree == null || typeof tree !== "object") return tree;
   const { $definitions: ctx = {}, ...other } = tree;
   const mustacheEscape = Mustache.escape;
   Mustache.escape = (str) => str;
@@ -65,7 +67,7 @@ const _process = (tree: Tree, ctx: Context) => {
       }
     }
     // Object
-  } else if (tree != null && typeof tree === 'object') {
+  } else if (tree != null && typeof tree === "object") {
     if (tree.$call) tree = _objectCall(tree, ctx);
     else if (tree.$merge !== undefined) tree = _merge(tree, ctx);
     else if (tree.$concatenate !== undefined) tree = _concat(tree, ctx);
@@ -74,8 +76,8 @@ const _process = (tree: Tree, ctx: Context) => {
     else tree = _object(tree, ctx);
 
     // String
-  } else if (typeof tree === 'string') {
-    if (tree[0] === '$') tree = _shortCall(tree, ctx);
+  } else if (typeof tree === "string") {
+    if (tree[0] === "$") tree = _shortCall(tree, ctx);
     else tree = _interpolate(tree, ctx);
   }
 
@@ -111,9 +113,9 @@ const _objectCall = (tree: Tree, ctx: Context) => {
 
 const _shortCall = (tree: Tree, ctx: Context) => {
   let name = tree.slice(1);
-  if (name[0] === '*') name = name.slice(1);
+  if (name[0] === "*") name = name.slice(1);
   let optional = false;
-  if (name[name.length - 1] === '?') {
+  if (name[name.length - 1] === "?") {
     optional = true;
     name = name.slice(0, name.length - 1);
   }
@@ -146,17 +148,16 @@ const _concat = (tree: Tree, ctx: Context) => {
 // - $csv: 'file:///home/user/myFile.csv'
 const _csv = (tree: Tree, ctx: Context) => {
   let csv = tree.$csv;
-  if (typeof csv !== 'string')
+  if (typeof csv !== "string")
     throw new Error(`SYNTAX_ERROR $csv should always contain a string`);
 
   // If the user is passing a path, resolve it and read its contents as a string
-  if (csv.startsWith('./') || csv.startsWith('file:/')) {
+  if (csv.startsWith("./") || csv.startsWith("file:/")) {
     const { pathname } = new URL(
       csv,
       `file://${process.cwd()}/` /* does nothing if csv is a URL */
     );
-    const fs = require('fs');
-    csv = fs.readFileSync(pathname, 'utf8');
+    csv = readFileSync(pathname, "utf8");
   }
 
   csv = csv.trim();
@@ -183,17 +184,16 @@ const _csv = (tree: Tree, ctx: Context) => {
 // - $yaml: 'file:///home/user/myFile.yaml'
 const _yaml = (tree: Tree, ctx: Context) => {
   let yaml = tree.$yaml;
-  if (typeof yaml !== 'string')
+  if (typeof yaml !== "string")
     throw new Error(`SYNTAX_ERROR $yaml should always contain a string`);
 
   // If the user is passing a path, resolve it and read its contents as a string
-  if (yaml.startsWith('./') || yaml.startsWith('file:/')) {
+  if (yaml.startsWith("./") || yaml.startsWith("file:/")) {
     const { pathname } = new URL(
       yaml,
       `file://${process.cwd()}/` /* does nothing if yaml is a URL */
     );
-    const fs = require('fs');
-    yaml = fs.readFileSync(pathname, 'utf8');
+    yaml = readFileSync(pathname, "utf8");
   }
 
   yaml = yaml.trim();
@@ -222,10 +222,10 @@ const _interpolate = (tree: Tree, ctx: Context) => {
 };
 
 const isExplodingObjectCall = (tree: Tree) =>
-  tree != null && typeof tree === 'object' && tree.$call && tree.$explode;
+  tree != null && typeof tree === "object" && tree.$call && tree.$explode;
 
 const isExplodingShortCall = (tree: Tree) =>
-  typeof tree === 'string' && tree[0] === '$' && tree[1] === '*';
+  typeof tree === "string" && tree[0] === "$" && tree[1] === "*";
 
 // ====================================
 // Public

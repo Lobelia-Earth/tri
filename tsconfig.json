@@ -21,5 +21,5 @@
     "rootDir": "src"
   },
   "exclude": ["node_modules", "src/__tests__", "src/sandbox.ts"],
-  "include": ["src"]
+  "include": ["eslint.config.js", "src"]
 }

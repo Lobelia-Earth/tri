@@ -33,7 +33,7 @@
     "build": "tsc && tsc -p tsconfig.cjs.json",
     "build:watch": "tsc --watch & tsc --watch -p tsconfig.cjs.json",
     "clean": "rm -r lib",
-    "lint": "eslint src --ext .js,.jsx,.ts,.tsx",
+    "lint": "eslint",
     "prettier": "prettier --write .",
     "test": "vitest run",
     "coverage": "vitest run --coverage",
@@ -47,24 +47,22 @@
     "timm": "^1.6.2"
   },
   "devDependencies": {
+    "@eslint/js": "^9.16.0",
     "@types/js-yaml": "^4.0.9",
     "@types/mustache": "^4.0.1",
     "@types/papaparse": "^5.3.7",
-    "@typescript-eslint/eslint-plugin": "^5.15.0",
-    "@typescript-eslint/parser": "^5.15.0",
-    "@vitest/coverage-v8": "2.1.7",
-    "eslint": "^8.11.0",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-import": "^2.25.4",
-    "eslint-plugin-react": "^7.28.0",
-    "eslint-plugin-react-hooks": "^4.3.0",
+    "@vitest/coverage-v8": "^2.1.7",
+    "eslint": "^9.16.0",
+    "eslint-config-prettier": "^9.1.0",
+    "globals": "^15.13.0",
     "prettier": "^3.4.1",
     "typescript": "^4.6.2",
+    "typescript-eslint": "^8.16.0",
     "vitest": "^2.1.7",
     "xxl": "^1.3.0"
   },
   "volta": {
-    "node": "20.4.0",
-    "yarn": "1.22.17"
+    "node": "22.11.0",
+    "yarn": "1.22.22"
   }
 }

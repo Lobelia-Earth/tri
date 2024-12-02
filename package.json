@@ -55,6 +55,7 @@
     "eslint": "^9.16.0",
     "eslint-config-prettier": "^9.1.0",
     "globals": "^15.13.0",
+    "oao": "^2.0.2",
     "prettier": "^3.4.1",
     "typescript": "^4.6.2",
     "typescript-eslint": "^8.16.0",

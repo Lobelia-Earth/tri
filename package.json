@@ -37,7 +37,7 @@
     "prettier": "prettier --write .",
     "test": "vitest run",
     "coverage": "vitest run --coverage",
-    "typecheck": "tsc --pretty",
+    "typecheck": "tsc --pretty --noEmit",
     "xxl": "xxl --src src --exclude /coverage/"
   },
   "dependencies": {

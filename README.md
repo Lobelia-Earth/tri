@@ -6,11 +6,11 @@ In this short example you can see some of these features in action:
 
 ```js
 tri({
-  a: '$foo', // equivalent to { $call: 'foo' }
-  b: { $call: 'sayHi', $params: { name: 'Guille' } },
+  a: "$foo", // equivalent to { $call: 'foo' }
+  b: { $call: "sayHi", $params: { name: "Guille" } },
   $definitions: {
-    foo: 'Hello world!',
-    sayHi: 'Hi, <<$.name>>!',
+    foo: "Hello world!",
+    sayHi: "Hi, <<$.name>>!",
   },
 });
 // Result:
@@ -23,7 +23,7 @@ You can either use the shorthand syntax `'$myFunction'`, if you don't need to pa
 
 ```js
 tri({
-  a: '$foo',
+  a: "$foo",
   $definitions: {
     foo: { something: { moreComplex: true } },
   },
@@ -36,8 +36,8 @@ Calling a function that doesn't exist usually throws. You can avoid it by making
 
 ```js
 tri({
-  a: '$fuzz?',
-  b: { $call: 'fuzz', $optional: true },
+  a: "$fuzz?",
+  b: { $call: "fuzz", $optional: true },
 });
 // Result:
 // { a: undefined, b: undefined }
@@ -47,10 +47,10 @@ Nested calls are possible, and they inherit all parameters from the outer call:
 
 ```js
 tri({
-  a: { $call: 'fn1', $params: { param1: 7 } },
+  a: { $call: "fn1", $params: { param1: 7 } },
   $definitions: {
-    fn1: { $call: 'fn2', $params: { param2: 10 } },
-    fn2: { result1: '$param1', result2: '$param2' },
+    fn1: { $call: "fn2", $params: { param2: 10 } },
+    fn2: { result1: "$param1", result2: "$param2" },
   },
 });
 // Result:
@@ -62,11 +62,11 @@ Finally, you can also use `$forEach` with an array of objects to call a function
 ```js
 tri({
   a: {
-    $call: 'fooize',
-    $forEach: [{ name: 'John' }, { name: 'Jane' }],
+    $call: "fooize",
+    $forEach: [{ name: "John" }, { name: "Jane" }],
   },
   $definitions: {
-    fooize: { foo: '$name' },
+    fooize: { foo: "$name" },
   },
 });
 // Result
@@ -79,8 +79,8 @@ You can use string interpolation to perform function calls and modify the result
 
 ```js
 tri({
-  a: 'Hi, <<$.name>>!',
-  $definitions: { name: 'John' },
+  a: "Hi, <<$.name>>!",
+  $definitions: { name: "John" },
 });
 // Result:
 // { a: 'Hi, John!' }
@@ -92,8 +92,8 @@ Note that _tri_ disables Mustache's default escapes while processing, so you don
 
 ```js
 tri({
-  a: 'This is the lower-than sign: <<$.lt>>',
-  $definitions: { lt: '<' },
+  a: "This is the lower-than sign: <<$.lt>>",
+  $definitions: { lt: "<" },
 });
 // Result:
 // { a: 'This is the lower than sign: <' }
@@ -107,16 +107,16 @@ tri({
 tri({
   obj: {
     $merge: [
-      '$fn1',
-      { $call: 'fn2', $params: { param: 'foo' } },
-      { $call: 'fn3', $params: { param: 3.14 } },
-      { some: 'constant' },
+      "$fn1",
+      { $call: "fn2", $params: { param: "foo" } },
+      { $call: "fn3", $params: { param: 3.14 } },
+      { some: "constant" },
     ],
   },
   $definitions: {
     fn1: { a: 3 },
-    fn2: { b: 'Hi <<$.param>>!' },
-    fn3: { c: '$param' },
+    fn2: { b: "Hi <<$.param>>!" },
+    fn3: { c: "$param" },
   },
 });
 // Result:
@@ -129,15 +129,15 @@ tri({
 tri({
   arr: {
     $concatenate: [
-      '$salute',
-      { $call: 'say', $params: { param: 'Nice to see you' } },
-      { $call: 'ask', $params: { param: 'What time is it' } },
+      "$salute",
+      { $call: "say", $params: { param: "Nice to see you" } },
+      { $call: "ask", $params: { param: "What time is it" } },
     ],
   },
   $definitions: {
-    salute: ['Hi', '----'],
-    say: ['<<$.param>>!', '----'],
-    ask: ['<<$.param>>?', '----'],
+    salute: ["Hi", "----"],
+    say: ["<<$.param>>!", "----"],
+    ask: ["<<$.param>>?", "----"],
   },
 });
 // Result:
@@ -155,14 +155,14 @@ A simpler way to concatenate results is to use _exploded_ calls (note the shorth
 ```js
 tri({
   arr: [
-    '$*salute',
-    { $call: 'say', $explode: true, $params: { param: 'Nice to see you' } },
-    { $call: 'ask', $explode: true, $params: { param: 'What time is it' } },
+    "$*salute",
+    { $call: "say", $explode: true, $params: { param: "Nice to see you" } },
+    { $call: "ask", $explode: true, $params: { param: "What time is it" } },
   ],
   $definitions: {
-    salute: ['Hi', '----'],
-    say: ['<<$.param>>!', '----'],
-    ask: ['<<$.param>>?', '----'],
+    salute: ["Hi", "----"],
+    say: ["<<$.param>>!", "----"],
+    ask: ["<<$.param>>?", "----"],
   },
 });
 // Result:
@@ -200,9 +200,9 @@ Alternatively, you can ask _tri_ to open a CSV file:
 tri({
   arr: {
     // Relative path
-    $csv: './myFile.csv',
+    $csv: "./myFile.csv",
     // Absolute path
-    $csv: 'file:///home/user/myFile.csv',
+    $csv: "file:///home/user/myFile.csv",
   },
 });
 ```
@@ -215,7 +215,7 @@ tri({
     $csv: `name,age,info
 John,30,"{""foo"":""bar""}"
 Jane,28,"{""foo"":""baz""}"`,
-    $json: ['info'],
+    $json: ["info"],
   },
 });
 // Result:
@@ -234,7 +234,7 @@ tri({
 John,<<$.color>>
 Jane,blue`,
   },
-  $definitions: { color: '#a0c0d0' },
+  $definitions: { color: "#a0c0d0" },
 });
 // Result:
 // { arr: [
@@ -248,14 +248,14 @@ Finally, you can combine `$csv` with `$forEach` to convert CSV records to an arb
 ```js
 tri({
   arr: {
-    $call: 'helloTemplate',
+    $call: "helloTemplate",
     $forEach: {
       $csv: `name,age
 John,30
 Jane,28`,
     },
   },
-  $definitions: { helloTemplate: { hello: '$name' } },
+  $definitions: { helloTemplate: { hello: "$name" } },
 });
 // Result:
 // { arr: [ { hello: 'John' }, { hello: 'Jane' } ] }
@@ -268,7 +268,7 @@ Similar to CSV, _tri_ can include external YAML files at any position of the tre
 ```js
 tri({
   rules: {
-    $yaml: './myFile.yaml',
+    $yaml: "./myFile.yaml",
   },
 });
 // Result (assuming myFile.yaml contains foo: bar and baz: 42):

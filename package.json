@@ -1,17 +1,12 @@
 {
   "name": "@isardsat/tri",
   "version": "1.12.3",
-  "author": "Lobelia",
-  "license": "MIT",
   "description": "Powerful configuration file processor",
-  "main": "lib/index.js",
   "keywords": [
     "configuration",
     "yaml",
     "csv"
   ],
-  "files": ["lib"],
-  "type": "module",
   "homepage": "https://github.com/lobelia-earth/tri",
   "bugs": {
     "url": "https://github.com/lobelia-earth/tri/issues"
@@ -20,6 +15,9 @@
     "type": "git",
     "url": "https://github.com/lobelia-earth/tri.git"
   },
+  "license": "MIT",
+  "author": "Lobelia",
+  "type": "module",
   "exports": {
     ".": {
       "import": "./lib/index.js",
@@ -27,15 +25,25 @@
       "types": "./lib/index.d.ts"
     }
   },
+  "main": "lib/index.js",
+  "files": [
+    "lib"
+  ],
   "scripts": {
     "build": "tsc && tsc -p tsconfig.cjs.json",
     "build:watch": "tsc --watch & tsc --watch -p tsconfig.cjs.json",
     "clean": "rm -r lib",
     "lint": "eslint src --ext .js,.jsx,.ts,.tsx",
-    "typecheck": "tsc --pretty",
+    "prettier": "prettier --single-quote --trailing-comma es5 --write \"src/**/*.[jt]s\"",
     "test": "jest --coverage --verbose 2>&1",
-    "xxl": "xxl --src src --exclude /coverage/",
-    "prettier": "prettier --single-quote --trailing-comma es5 --write \"src/**/*.[jt]s\""
+    "typecheck": "tsc --pretty",
+    "xxl": "xxl --src src --exclude /coverage/"
+  },
+  "jest": {
+    "roots": [
+      "<rootDir>/src/"
+    ],
+    "testRegex": ".*__tests__/.*\\.test\\.(ts|tsx)$"
   },
   "dependencies": {
     "js-yaml": "^4.1.0",
@@ -63,11 +71,5 @@
   "volta": {
     "node": "20.4.0",
     "yarn": "1.22.17"
-  },
-  "jest": {
-    "testRegex": ".*__tests__/.*\\.test\\.(ts|tsx)$",
-    "roots": [
-      "<rootDir>/src/"
-    ]
   }
 }

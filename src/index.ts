@@ -3,7 +3,7 @@ import Mustache from "mustache";
 import type { OpeningAndClosingTags } from "mustache";
 import Papa from "papaparse";
 import { readFileSync } from "node:fs";
-import yamlParser from "js-yaml";
+import YAML from 'yaml';
 
 const TEMPLATE_TAGS: OpeningAndClosingTags = ["<<", ">>"];
 const CSV_PARSE_OPTIONS = {
@@ -197,7 +197,7 @@ const _yaml = (tree: Tree, ctx: Context) => {
   }
 
   yaml = yaml.trim();
-  const parsed = yamlParser.load(yaml);
+  const parsed = YAML.parse(yaml);
   return _process(parsed, ctx);
 };
 

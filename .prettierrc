@@ -1,0 +1,2 @@
+# this is the default, but some IDEs still apply previous default, es5
+trailingComma: all

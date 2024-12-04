@@ -1,6 +1,8 @@
 {
   "name": "@isardsat/tri",
   "version": "1.12.3",
+  "author": "Lobelia",
+  "license": "MIT",
   "description": "Powerful configuration file processor",
   "keywords": [
     "configuration",
@@ -15,8 +17,6 @@
     "type": "git",
     "url": "https://github.com/lobelia-earth/tri.git"
   },
-  "license": "MIT",
-  "author": "Lobelia",
   "type": "module",
   "exports": {
     ".": {

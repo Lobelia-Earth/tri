@@ -1,3 +1,5 @@
+## 1.13.0 (2024-12-4)
+
 - Remove Babel and use tsc directly.
 - Bump TypeScript.
 - Compile to ESM and CommonJS targets.

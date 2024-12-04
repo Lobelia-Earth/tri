@@ -3,7 +3,7 @@ import Mustache from "mustache";
 import type { OpeningAndClosingTags } from "mustache";
 import Papa from "papaparse";
 import { readFileSync } from "node:fs";
-import YAML from 'yaml';
+import YAML from "yaml";
 
 const TEMPLATE_TAGS: OpeningAndClosingTags = ["<<", ">>"];
 const CSV_PARSE_OPTIONS = {
@@ -54,7 +54,7 @@ const _process = (tree: Tree, ctx: Context) => {
         const results = _objectCall(item, ctx);
         if (!Array.isArray(results))
           throw new Error(
-            `INVALID_EXPLODED_CALL ${JSON.stringify(item, null, 2)}`
+            `INVALID_EXPLODED_CALL ${JSON.stringify(item, null, 2)}`,
           );
         tree = tree.concat(results);
       } else if (isExplodingShortCall(item)) {
@@ -155,7 +155,7 @@ const _csv = (tree: Tree, ctx: Context) => {
   if (csv.startsWith("./") || csv.startsWith("file:/")) {
     const { pathname } = new URL(
       csv,
-      `file://${process.cwd()}/` /* does nothing if csv is a URL */
+      `file://${process.cwd()}/` /* does nothing if csv is a URL */,
     );
     csv = readFileSync(pathname, "utf8");
   }
@@ -191,7 +191,7 @@ const _yaml = (tree: Tree, ctx: Context) => {
   if (yaml.startsWith("./") || yaml.startsWith("file:/")) {
     const { pathname } = new URL(
       yaml,
-      `file://${process.cwd()}/` /* does nothing if yaml is a URL */
+      `file://${process.cwd()}/` /* does nothing if yaml is a URL */,
     );
     yaml = readFileSync(pathname, "utf8");
   }

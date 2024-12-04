@@ -1,8 +1,8 @@
-## Next
-
-- Provide CJS and ESM exports
-- Deprecate babel in favour of Typescript's compiler
-- Deprecate Jest in favour of Vitest
+- Remove Babel and use tsc directly.
+- Bump TypeScript.
+- Compile to ESM and CommonJS targets.
+- Remove prettier opinions.
+- Replace Jest by Vitest.
 
 ## 1.12.3 (2024-6-25)
 

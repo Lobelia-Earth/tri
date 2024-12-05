@@ -30,8 +30,8 @@
     "lib"
   ],
   "scripts": {
-    "build": "tsc && tsc -p tsconfig.cjs.json",
-    "build:watch": "tsc --watch & tsc --watch -p tsconfig.cjs.json",
+    "build": "yarn clean && tsc && tsc -p tsconfig.cjs.json",
+    "build:watch": "yarn clean && tsc --watch & tsc --watch -p tsconfig.cjs.json",
     "clean": "rm -r lib",
     "lint": "eslint",
     "prettier": "prettier --write .",

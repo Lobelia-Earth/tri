@@ -1,8 +1,6 @@
 {
   "name": "@isardsat/tri",
   "version": "1.13.0",
-  "author": "Lobelia",
-  "license": "MIT",
   "description": "Powerful configuration file processor",
   "keywords": [
     "configuration",
@@ -17,26 +15,31 @@
     "type": "git",
     "url": "https://github.com/lobelia-earth/tri.git"
   },
+  "license": "MIT",
+  "author": "Lobelia",
   "type": "module",
   "exports": {
     ".": {
-      "import": "./lib/index.js",
+      "import": "./lib/esm/index.js",
       "require": "./lib/cjs/index.js",
-      "types": "./lib/index.d.ts"
+      "types": "./lib/esm/index.d.ts"
     }
   },
-  "main": "lib/index.js",
+  "main": "./lib/cjs/index.js",
+  "module": "./lib/esm/index.js",
+  "types": "./lib/esm/index.d.ts",
   "files": [
     "lib"
   ],
   "scripts": {
     "build": "tsc && tsc -p tsconfig.cjs.json",
+    "postbuild": "node scripts/postbuild.js",
     "build:watch": "tsc --watch & tsc --watch -p tsconfig.cjs.json",
     "clean": "rm -r lib",
+    "coverage": "vitest run --coverage",
     "lint": "eslint",
     "prettier": "prettier --write .",
     "test": "vitest run",
-    "coverage": "vitest run --coverage",
     "typecheck": "tsc --pretty --noEmit",
     "xxl": "xxl --src src --exclude /coverage/"
   },

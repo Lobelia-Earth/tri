@@ -2,7 +2,7 @@
   "compilerOptions": {
     // Default to outputting ESM
     "module": "ESNext",
-    "outDir": "lib",
+    "outDir": "lib/esm",
     "declaration": true,
 
     "esModuleInterop": true,

@@ -1,3 +1,5 @@
+## 1.13.1 (2024-12-8)
+
 ## 1.13.0 (2024-12-4)
 
 - Remove Babel and use tsc directly.
